@@ -1,0 +1,15 @@
+.column {
+        margin: .20em;
+        padding: .1em;
+        border-style: solid;
+}
+
+.column.right {
+    margin-left: 0em;
+    border-left-style: none;
+}
+
+.column-container {
+    margin: 0;
+    padding: 0;
+}
