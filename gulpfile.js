@@ -9,7 +9,8 @@ var del     = require('del'),
     uglify  = require('gulp-uglify'),
 
     // delpoying
-    deploy  = require('gulp-gh-pages');
+    deploy  = require('gulp-gh-pages'),
+    debug   = require('gulp-debug');
 
 gulp.task('default', ['clean'], function() {
     gulp.start('move', 'templates')
@@ -32,8 +33,9 @@ gulp.task('templates', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('deploy', ['default'], function () {
-    return gulp.src("./dist/**/**/*")
+gulp.task('deploy', function () {
+    return gulp.src("dist/**/**/*")
+        .pipe(debug({title: 'gulp-gh-pages'}))
         .pipe(deploy());
 });
 
