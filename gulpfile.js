@@ -19,8 +19,8 @@ gulp.task('default', ['clean'], function() {
 
 gulp.task('move', function() {
         // Resources
-        gulp.src('src/resources/**/*')
-            .pipe(gulp.dest("dist/resources/"))
+        return gulp.src('src/resources/**/*')
+            .pipe(gulp.dest("dist/resources/"));
 });
 
 gulp.task('templates', function() {
