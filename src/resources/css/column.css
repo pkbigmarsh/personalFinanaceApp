@@ -1,15 +1,40 @@
 .column {
         margin: .20em;
+        margin-right: 0;
         padding: .1em;
+        padding-left: .2em;
         border-style: solid;
+        height: 100%;
 }
 
 .column.right {
     margin-left: 0em;
+    margin-right: 0em;
     border-left-style: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .column-container {
     margin: 0;
     padding: 0;
+    height: 100%;
+}
+
+.column.right.small {
+    height: 98%;
+}
+
+.column.right.smaller {
+    height: 96%;
+}
+
+.row, .container-fluid {
+    height: 100%;
+}
+
+html, body {
+    height: 100%;
+    padding: .2em;
 }
