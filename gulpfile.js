@@ -18,13 +18,13 @@ gulp.task('default', ['clean'], function() {
 
 
 gulp.task('move', function() {
-        // Resources
-        return gulp.src('src/resources/**/*')
-            .pipe(gulp.dest("dist/resources/"));
+    // Resources
+    return gulp.src('src/resources/**/*')
+        .pipe(gulp.dest("dist/resources/"));
 });
 
 gulp.task('templates', function() {
-    gulp.src('src/jade/*.jade')
+    return gulp.src('src/jade/*.jade')
     .pipe(plumber({ errorHandler: notify.onError('<%= error.message %>') }))
     .pipe(jade({
         basedir: './src/jade',
@@ -33,7 +33,7 @@ gulp.task('templates', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('deploy', function () {
+gulp.task('deploy', ['default'], function () {
     return gulp.src("dist/**/**/*")
         .pipe(debug({title: 'gulp-gh-pages'}))
         .pipe(deploy());
