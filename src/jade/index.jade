@@ -1,6 +1,9 @@
 extends templates/master.jade
 
 block body
-    div.header
-        h1
-            | Hello World!
+    .container-fluid
+        .row
+            include page_columns/all_columns.jade
+
+block scripts
+    script(src="resources/js/slide.js")
