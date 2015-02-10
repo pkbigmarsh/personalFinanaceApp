@@ -16,14 +16,30 @@ var del             = require('del'),
     deploy          = require('gulp-gh-pages');
 
 gulp.task('default', ['clean', 'browser-sync'], function() {
-    gulp.start('move', 'templates', 'bs-reload');
+    gulp.start('plugins', 'css', 'js', 'templates');
+
+    gulp.watch("src/resources/js/**/*.js", ['js']);
+    gulp.watch("src/jade/**/**/*.jade", ['templates']);
+    gulp.watch("*src/resources/js/.css", ['css']);
 });
 
 
-gulp.task('move', function() {
-        // Resources
-        return gulp.src('src/resources/**/*')
-            .pipe(gulp.dest("dist/resources/"));
+gulp.task('plugins', function() {
+    // Resources
+    return gulp.src('src/resources/plugins/**/*')
+        .pipe(gulp.dest("dist/resources/plugins/"));
+});
+
+gulp.task('css', function () {
+    return gulp.src('src/resources/css/**/*')
+        .pipe(gulp.dest("dist/resources/css/"))
+        .pipe(browserSync.reload({stream:true}));
+});
+
+gulp.task('js', function () {
+    return gulp.src('src/resources/js/**/*')
+        .pipe(gulp.dest("dist/resources/js/"))
+        .pipe(browserSync.reload({stream:true}));
 });
 
 gulp.task('templates', function() {
@@ -33,7 +49,8 @@ gulp.task('templates', function() {
         basedir: './src/jade',
         pretty: true
     }))
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('dist/'))
+    .pipe(browserSync.reload({stream:true}));
 });
 
 gulp.task('deploy', function () {
@@ -45,13 +62,9 @@ gulp.task('deploy', function () {
 gulp.task('clean', del.bind(null, ['dist/**/**/*', '!.*']));
 
 gulp.task('browser-sync', function() {
-        browserSync({
-            server: {
-                baseDir: "./dist/"
-            }
-        });
-});
-
-gulp.task('bs-reload', function() {
-        browserSync.reload();
+    browserSync({
+        server: {
+            baseDir: "./dist/"
+        }
+    });
 });
