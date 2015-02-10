@@ -1,19 +1,22 @@
-var del     = require('del'),
-    gulp    = require('gulp'),
-    notify  = require('gulp-notify'),
-    plumber = require('gulp-plumber'),
+var del             = require('del'),
+    gulp            = require('gulp'),
+    notify          = require('gulp-notify'),
+    plumber         = require('gulp-plumber'),
+    debug           = require('gulp-debug'),
+    browserSync     = require('browser-sync'),
+
     // jade
-    jade    = require('gulp-jade'),
+    jade            = require('gulp-jade'),
+
     // js
-    jshint  = require('gulp-jshint'),
-    uglify  = require('gulp-uglify'),
+    jshint          = require('gulp-jshint'),
+    uglify          = require('gulp-uglify'),
 
     // delpoying
-    deploy  = require('gulp-gh-pages'),
-    debug   = require('gulp-debug');
+    deploy          = require('gulp-gh-pages');
 
-gulp.task('default', ['clean'], function() {
-    gulp.start('move', 'templates')
+gulp.task('default', ['clean', 'browser-sync'], function() {
+    gulp.start('move', 'templates', 'bs-reload');
 });
 
 
@@ -24,7 +27,7 @@ gulp.task('move', function() {
 });
 
 gulp.task('templates', function() {
-    gulp.src('src/jade/*.jade')
+    return gulp.src('src/jade/*.jade')
     .pipe(plumber({ errorHandler: notify.onError('<%= error.message %>') }))
     .pipe(jade({
         basedir: './src/jade',
@@ -40,3 +43,15 @@ gulp.task('deploy', function () {
 });
 
 gulp.task('clean', del.bind(null, ['dist/**/**/*', '!.*']));
+
+gulp.task('browser-sync', function() {
+        browserSync({
+            server: {
+                baseDir: "./dist/"
+            }
+        });
+});
+
+gulp.task('bs-reload', function() {
+        browserSync.reload();
+});
