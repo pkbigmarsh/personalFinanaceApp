@@ -33,7 +33,7 @@
     z-index: 6;
 }
 
-.row, .container-fluid {
+.row.columns, .container-fluid {
     height: 100%;
 }
 
