@@ -8,16 +8,21 @@ $(document).ready(function() {
 
     $(columns[1]).toggle();
     $(columns[2]).toggle();
-
-    slide(columns[1]);
-    slide(columns[2]);
 });
 
 
-var slide = function(column) {
+var slideRight = function(column) {
     $(column).toggle({
             effect: "slide",
             duration: 1000,
-            direction: "left"
+            direction: "right"
+    });
+}
+
+var slideLeft = function(column) {
+    $(column).toggle({
+            effect: "slide",
+            duration: 1000,
+            direction: "right"
     });
 }
