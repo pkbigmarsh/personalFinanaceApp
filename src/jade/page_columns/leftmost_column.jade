@@ -2,4 +2,13 @@ extends ../templates/page_column.jade
 
 block column_content
     #leftmost_column.column
-        h1 Column 1
+        .container-fluid
+            br
+            .row
+                input.center-horizontal#username(placeholder="username", type="text")
+            .row
+                input.center-horizontal#password(placeholder="password", type="password")
+            .row
+                button.center-horizontal#log_in.btn.btn-info
+                    | log in
+                    
