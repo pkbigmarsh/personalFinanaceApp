@@ -1,13 +1,9 @@
 $(document).ready(function() {
     window.columns = [];
 
-
     $(".column").each(function(index, value) {
             window.columns.push(value);
     });
-
-    $(columns[1]).toggle();
-    $(columns[2]).toggle();
 });
 
 
